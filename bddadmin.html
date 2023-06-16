@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestion de la base de données</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .container input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Gestion de la base de données</h2>
+
+        <br><br> <h3> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bienvenue  BDDADMIN !   :) </h3>
+        <br><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button onclick="displayTableField('insert')">Insert</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button onclick="displayTableField('delete')">Delete</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button onclick="displayTableField('update')">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button onclick="displayTableField('select')">Select</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        
+        <form id="tableForm" style="display: none;">
+            <br><br><br><br>
+            <label for="tableName">Nom de la table :</label>
+            <input type="text" name="tableName" id="tableName" required>
+            <br><br><br><br><br><br><br>
+            <input type="submit" value="Valider">
+        </form>
+    </div>
+    
+    <script>
+        function displayTableField(action) {
+            var form = document.getElementById('tableForm');
+            form.style.display = 'block';
+            
+            var tableNameField = document.getElementById('tableName');
+            tableNameField.value = '';
+            tableNameField.placeholder = 'Nom de la table pour ' + action;
+            
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                
+                var tableName = tableNameField.value;
+                if (tableName.trim() !== '') {
+                    // Rediriger ou effectuer l'action souhaitée en fonction du bouton sélectionné
+                    if (action === 'insert') {
+                        // Redirection vers la page d'insertion avec le nom de la table
+                        window.location.href = 'insert.php?table=' + tableName;
+                    } else if (action === 'delete') {
+                        // Redirection vers la page de suppression avec le nom de la table
+                        window.location.href = 'delete.php?table=' + tableName;
+                    } else if (action === 'update') {
+                        // Redirection vers la page de mise à jour avec le nom de la table
+                        window.location.href = 'update.php?table=' + tableName;
+                    } else if (action === 'select') {
+                        // Redirection vers la page de sélection avec le nom de la table
+                        window.location.href = 'select.php?table=' + tableName;
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+</html>
